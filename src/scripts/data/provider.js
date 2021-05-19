@@ -40,7 +40,7 @@ export const fetchPosts = () => {
     return fetch(`${apiURL}/posts`)
         .then(res => res.json())
         .then(
-            (getPosts) => {
+            (posts) => {
                 applicationState.posts = posts
             }
         )
