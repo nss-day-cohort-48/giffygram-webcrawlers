@@ -6,7 +6,24 @@ const applicationState = {
     currentUser: {},
     feed: {
         chosenUser: null,
-        displayFavorites: false,
+        displayLikes: false,
         displayMessages: false
     }
+}
+
+
+export const getUsers = () => {
+    return [...applicationState.users]
+}
+
+export const getPosts = () => {
+    return [...applicationState.posts]
+}
+
+export const getLikes = () => {
+    return [...applicationState.likes]
+}
+
+export const getMessages = () => {
+    return [...applicationState.messages]
 }
