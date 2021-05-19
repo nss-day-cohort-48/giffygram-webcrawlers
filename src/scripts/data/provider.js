@@ -27,13 +27,48 @@ export const getMessages = () => {
     return [...applicationState.messages]
 }
 
-export const fetchData = () => {
-    return fetch(`${apiURL}`)
+export const fetchUsers = () => {
+    return fetch(`${apiURL}/users`)
         .then(res => res.json())
         .then(
-            (database) => {
-                applicationState.database = database
+            (users) => {
+                applicationState.users = users
             }
         )
 }
-
+export const fetchPosts = () => {
+    return fetch(`${apiURL}/posts`)
+        .then(res => res.json())
+        .then(
+            (getPosts) => {
+                applicationState.posts = posts
+            }
+        )
+}
+export const fetchLikes = () => {
+    return fetch(`${apiURL}/likes`)
+        .then(res => res.json())
+        .then(
+            (likes) => {
+                applicationState.likes = likes
+            }
+        )
+}
+export const fetchMessages = () => {
+    return fetch(`${apiURL}/messages`)
+        .then(res => res.json())
+        .then(
+            (messages) => {
+                applicationState.messages = messages
+            }
+        )
+}
+export const fetchFollows = () => {
+    return fetch(`${apiURL}/follows`)
+        .then(res => res.json())
+        .then(
+            (follows) => {
+                applicationState.follows = follows
+            }
+        )
+}
