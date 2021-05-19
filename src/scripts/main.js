@@ -2,13 +2,13 @@ import { LoginForm } from "./auth/Login.js"
 import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchUsers } from "./data/provider.js"
 import { GiffyGram } from "./GiffyGram.js"
 
+
 const applicationElement = document.querySelector(".giffygram")
 
 
 applicationElement.addEventListener(
     "stateChanged",
     () => {
-        debugger
         renderApp()
     }
 )
