@@ -1,4 +1,4 @@
-const apiURL = "http://localhost:8088"
+const apiURL = "http://localhost:3000"
 const applicationElement = document.querySelector(".giffygram")
 
 
@@ -10,7 +10,6 @@ const applicationState = {
         displayMessages: false
     }
 }
-
 
 export const getUsers = () => {
     return [...applicationState.users]
@@ -27,3 +26,14 @@ export const getLikes = () => {
 export const getMessages = () => {
     return [...applicationState.messages]
 }
+
+export const fetchData = () => {
+    return fetch(`${apiURL}`)
+        .then(res => res.json())
+        .then(
+            (database) => {
+                applicationState.database = database
+            }
+        )
+}
+
