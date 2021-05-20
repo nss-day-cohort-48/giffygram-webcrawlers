@@ -110,3 +110,21 @@ export const addPost = (postObject) => {
 export const setDateFilter = (date) => {
     applicationState.filters.date = date
 }
+
+export const setUserFilter = (userId) => {
+    applicationState.filters.userId = userId
+}
+
+export const setFavoritesFilter = (isChecked) => {
+    applicationState.filters.favoritesOnly = isChecked
+}
+
+export const setPostCount = (postCount) => {
+    applicationState.filters.postCount = postCount
+}
+
+export const clearFilters = () => {
+    applicationState.filters.date = null
+    applicationState.filters.userId = null
+    applicationState.filters.favoritesOnly = null
+}
