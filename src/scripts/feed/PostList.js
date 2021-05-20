@@ -5,7 +5,7 @@ export const PostList = () => {
 
     //const likes = getLikes()
     const posts = getPosts()
- 
+
     //const users = getUsers()
     let html = ""
     for (const post of posts) {
