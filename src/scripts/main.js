@@ -18,10 +18,10 @@ export const renderApp = () => {
     const user = parseInt(localStorage.getItem("gg_user"))
 
     fetchPosts()
-        .then(fetchUsers())
-        .then(fetchLikes())
-        .then(fetchMessages())
-        .then(fetchFollows())
+        .then(fetchUsers)
+        .then(fetchLikes)
+        .then(fetchMessages)
+        .then(fetchFollows)
         .then(() => {
             if (user) {
                 applicationElement.innerHTML = GiffyGram()
