@@ -1,17 +1,17 @@
-export const Post = (post) => {
+export const Post = (post, user) => {
     return `<section class="post">
         <header>
             <h2 class="post__title">${post.title}</h2>
         </header>
-        <img class="post__image" ${post.imageURL}>
+        <img class="post__image" src="${post.imageURL}">
         <div class="post__description">${post.description}
         </div>
         <div class="post__tagline">
             Posted by
             <a href="#" class="profileLink" id="profile--2">
-            ${post.userId}
+            ${user.name}
             </a>
-            on ${post.userId}
+            on ${new Date(post.timestamp).toLocaleString("en-US", {month: "numeric", day: "numeric", year: "numeric"})}
         </div>
         <div class="post__actions">
             <div>
