@@ -10,6 +10,15 @@ applicationElement.addEventListener(
     }
 )
 
+applicationElement.addEventListener(
+    "click",
+    (event) => {
+        if (event.target.id === "newPost__submit") {
+
+        }
+    }
+)
+
 export const PostEntry = () => {
 
     return `
