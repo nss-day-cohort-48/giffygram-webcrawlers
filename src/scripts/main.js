@@ -1,18 +1,25 @@
+
 import { LoginForm } from "./auth/Login.js"
-import { fetchPosts, fetchUsers, fetchLikes, fetchMessages, fetchFollows   } from "./data/provider.js"
+import { fetchUsers, fetchFollows, fetchLikes, fetchMessages, fetchPosts } from "./data/provider.js"
 import { GiffyGram } from "./GiffyGram.js"
 
-
 const applicationElement = document.querySelector(".giffygram")
-const user = parseInt(localStorage.getItem("gg_user"))
+
+
+applicationElement.addEventListener(
+    "stateChanged",
+    () => {
+        
+        renderApp()
+    }
+)
 
 export const renderApp = () => {
-    fetchPosts()
     fetchUsers()
-    fetchLikes()
+    fetchPosts()
     fetchMessages()
     fetchFollows()
-    
+    fetchLikes()
     .then(() => {
         if (user) {
             applicationElement.innerHTML = GiffyGram()
