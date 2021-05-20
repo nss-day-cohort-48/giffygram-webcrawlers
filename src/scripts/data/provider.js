@@ -8,6 +8,7 @@ const applicationState = {
         displayLikes: false,
         displayMessages: false,
     },
+    filters: {},
     "users": [],
     "posts": [],
     "likes": [],
@@ -86,6 +87,10 @@ export const getFollows = () => {
     return [...applicationState.follows]
 }
 
+export const getFilters = () => {
+    return {...applicationState.filters }
+}
+
 export const addPost = (postObject) => {
     const fetchPost = {
         method: "POST",
@@ -100,4 +105,8 @@ export const addPost = (postObject) => {
         .then(() => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
+}
+
+export const setDateFilter = (date) => {
+    applicationState.filters.date = date
 }

@@ -1,3 +1,21 @@
+import { setDateFilter } from "../data/provider.js"
+import { PostList } from "../feed/PostList.js"
+
+const applicationElement = document.querySelector(".giffygram")
+
+
+applicationElement.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.id === "yearSelection") {
+            const date = event.target.value
+            setDateFilter(date)
+            const mainFeed = document.querySelector(".giffygram__feed")
+            mainFeed.innerHTML = PostList()
+        }
+    }
+)
+
 export const Footer = () => {
 
     return `<footer class="footer">
