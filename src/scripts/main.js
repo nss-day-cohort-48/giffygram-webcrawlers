@@ -1,4 +1,3 @@
-
 import { LoginForm } from "./auth/Login.js"
 import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchUsers } from "./data/provider.js"
 import { GiffyGram } from "./GiffyGram.js"
@@ -18,11 +17,11 @@ applicationElement.addEventListener(
 export const renderApp = () => {
     const user = parseInt(localStorage.getItem("gg_user"))
 
-    fetchUsers()
     fetchPosts()
-    fetchLikes()
-    fetchMessages()
-    fetchFollows()
+        .then(fetchUsers())
+        .then(fetchLikes())
+        .then(fetchMessages())
+        .then(fetchFollows())
         .then(() => {
             if (user) {
                 applicationElement.innerHTML = GiffyGram()
