@@ -1,15 +1,5 @@
-import { getPosts } from '../data/provider.js'
-
-export const Post = () => {
-    
-    const posts = getPosts()
-
-    let html = "<h2>postList</h2>"
-
-    for (const postId of postList) {
-        const post = posts.find(post => post.id === postId)
-
-        html += `<section class="post">
+export const Post = (post) => {
+    return `<section class="post">
         <header>
             <h2 class="post__title">${post.title}</h2>
         </header>
@@ -28,12 +18,8 @@ export const Post = () => {
                 <img id="favoritePost--4" class="actionIcon" src="/images/favorite-star-blank.svg">
             </div>
             <div>
-                
-
             </div>
         </div>
-    </section>`
-    }
-
-    return html
+    </section>
+        `
 }

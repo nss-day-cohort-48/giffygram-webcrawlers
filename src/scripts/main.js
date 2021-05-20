@@ -15,6 +15,8 @@ applicationElement.addEventListener(
 )
 
 export const renderApp = () => {
+    const user = parseInt(localStorage.getItem("gg_user"))
+
     fetchUsers()
     fetchPosts()
     fetchMessages()
