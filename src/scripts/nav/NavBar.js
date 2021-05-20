@@ -19,7 +19,6 @@ export const NavBar = () => {
                 Giffygram
             </div>
             <div class="navigation__item navigation__search">
-
             </div>
             <div class="navigation__item navigation__message">
                 <img id="directMessageIcon" src="/images/fountain-pen.svg" alt="Direct message" />
