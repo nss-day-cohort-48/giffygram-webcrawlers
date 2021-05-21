@@ -1,6 +1,6 @@
 import { LoginForm } from "./auth/Login.js"
 import { RegisterForm } from "./auth/Register.js"
-import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchUsers } from "./data/provider.js"
+import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchProfiles, fetchUsers } from "./data/provider.js"
 import { GiffyGram } from "./GiffyGram.js"
 
 
@@ -22,6 +22,7 @@ export const renderApp = () => {
         .then(fetchLikes)
         .then(fetchMessages)
         .then(fetchFollows)
+        .then(fetchProfiles)
         .then(() => {
             if (user) {
                 applicationElement.innerHTML = GiffyGram()

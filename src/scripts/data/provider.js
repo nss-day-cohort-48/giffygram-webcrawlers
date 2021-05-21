@@ -57,6 +57,14 @@ export const fetchFollows = () => {
         });
 };
 
+export const fetchProfiles = () => {
+    return fetch(`${apiURL}/profiles`)
+        .then((res) => res.json())
+        .then((profiles) => {
+            applicationState.profiles = profiles;
+        });
+};
+
 
 export const deletePost = (id) => {
     return fetch(`${apiURL}/posts/${id}`, {
@@ -69,6 +77,10 @@ export const deletePost = (id) => {
 
 export const getUsers = () => {
     return [...applicationState.users];
+};
+
+export const getProfiles = () => {
+    return [...applicationState.profiles];
 };
 
 export const getPosts = () => {
