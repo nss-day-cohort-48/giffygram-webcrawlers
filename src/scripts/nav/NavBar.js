@@ -1,8 +1,22 @@
-import { getMessages } from "../data/provider.js"
+import { getMessages, setDisplayMessage, clearFilters } from "../data/provider.js"
 
 document.addEventListener("click", event => {
     if (event.target.id === "logout") {
         localStorage.removeItem("gg_user")
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
+document.addEventListener("click", event => {
+    if (event.target.classList.contains("notification__count")) {
+        setDisplayMessage(true)
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
+document.addEventListener("click", event => {
+    if (event.target.id === "logo") {
+        clearFilters()
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
@@ -22,6 +36,7 @@ export const NavBar = () => {
             </div>
             <div class="navigation__item navigation__message">
                 <img id="directMessageIcon" src="/images/fountain-pen.svg" alt="Direct message" />
+                
                 <div class="notification__count">
                     ${ messages.length }
                 </div>
