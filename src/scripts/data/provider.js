@@ -101,3 +101,19 @@ export const addPost = (postObject) => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
+
+export const sendMessage = (messageObject) => {
+    const fetchMessage = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(messageObject)
+    }
+
+    return fetch(`${apiURL}/messages`, fetchMessage)
+        .then(res => res.json())
+        .then(() => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}

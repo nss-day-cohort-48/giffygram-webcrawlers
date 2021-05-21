@@ -1,4 +1,4 @@
-import { getUsers } from "../data/provider.js"
+import { getUsers, sendMessage } from "../data/provider.js"
 const applicationElement = document.querySelector(".giffygram")
 
 //setting the initial value of boolean "messageBox" to true, it is true that it is not open upon rendering dom
@@ -20,7 +20,21 @@ applicationElement.addEventListener("click", clickEvent => {
     }
 })
 
+applicationElement.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id === "directMessage__submit") {
+        const recipient = applicationElement.querySelector("select[name='directMessage__userSelect']").value
+        const message = applicationElement.querySelector("input[name='message']").value
+        const [, recipientId] = recipient.split("--")
 
+        const messageObject = {
+            userId: parseInt(localStorage.getItem("gg_user")),
+            recipientId: parseInt(recipientId),
+            message: message
+        }
+
+        sendMessage(messageObject)
+    }
+})
 
 
 export const MessageForm = () => {
@@ -39,7 +53,7 @@ export const MessageForm = () => {
                         ${
                             users.map(
                                 (user) => {
-                                    return `<option value="messageRecipient--${user.name}">${user.name}</option>
+                                    return `<option value="messageRecipient--${user.id}">${user.name}</option>
                                 `})
                         }
                     </select>
