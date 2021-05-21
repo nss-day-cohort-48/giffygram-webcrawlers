@@ -135,6 +135,24 @@ export const registerUser = (userObject) => {
         })
 }
 
+export const addProfile = (profileObject) => {
+    const fetchPost = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(profileObject)
+    }
+
+    return fetch(`${apiURL}/profiles`, fetchPost)
+        .then(res => res.json())
+        .then(() => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
+
+
 export const setDateFilter = (date) => {
     applicationState.filters.date = date
 }

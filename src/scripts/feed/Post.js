@@ -1,4 +1,7 @@
+import { getFilters, setUserFilter } from "../data/provider.js"
 import { UserProfile } from "../profile/UserProfile.js"
+import { PostList } from "./PostList.js"
+
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -6,6 +9,14 @@ applicationElement.addEventListener("click", event => {
     if (event.target.id.startsWith("profile")) {
         const [, userId] = event.target.id.split("--")
         applicationElement.innerHTML = UserProfile(parseInt(userId))
+        setUserFilter(parseInt(userId))
+
+        const mainFeed = document.querySelector(".giffygram__feed")
+        mainFeed.innerHTML = PostList()
+
+        const filters = getFilters()
+        const postCount = document.querySelector("#postCount")
+        postCount.innerHTML = filters.postCount
     }
 })
 
