@@ -18,7 +18,7 @@ applicationElement.addEventListener(
         if (event.target.id === "newPost__submit") {
             const newPost = {
                 title: document.querySelector("#postTitle").value,
-                url: document.querySelector("#postURL").value,
+                imageURL: document.querySelector("#postURL").value,
                 description: document.querySelector("#postDescription").value,
                 userId: parseInt(localStorage.getItem("gg_user")),
                 timestamp: Date.now()

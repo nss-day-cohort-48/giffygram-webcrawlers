@@ -9,7 +9,6 @@ const applicationElement = document.querySelector(".giffygram")
 applicationElement.addEventListener(
     "stateChanged",
     () => {
-
         renderApp()
     }
 )

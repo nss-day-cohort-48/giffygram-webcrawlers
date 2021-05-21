@@ -1,3 +1,86 @@
+import { clearFilters, getFilters, setDateFilter, setFavoritesFilter, setUserFilter } from "../data/provider.js"
+import { PostList } from "../feed/PostList.js"
+
+const applicationElement = document.querySelector(".giffygram")
+
+
+applicationElement.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.id === "yearSelection") {
+            const date = event.target.value
+            setDateFilter(date)
+
+            const mainFeed = document.querySelector(".giffygram__feed")
+            mainFeed.innerHTML = PostList()
+
+            const filters = getFilters()
+            const postCount = document.querySelector("#postCount")
+            postCount.innerHTML = filters.postCount
+        }
+    }
+)
+
+applicationElement.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.id === "userSelection") {
+            const [, userId] = event.target.value.split("--")
+            setUserFilter(parseInt(userId))
+
+            const mainFeed = document.querySelector(".giffygram__feed")
+            mainFeed.innerHTML = PostList()
+
+            const filters = getFilters()
+            const postCount = document.querySelector("#postCount")
+            postCount.innerHTML = filters.postCount
+        }
+    }
+)
+
+applicationElement.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.id === "showOnlyFavorites") {
+            if (event.target.checked) {
+                let isChecked = true
+                setFavoritesFilter(isChecked)
+
+                const mainFeed = document.querySelector(".giffygram__feed")
+                mainFeed.innerHTML = PostList()
+
+                const filters = getFilters()
+                const postCount = document.querySelector("#postCount")
+                postCount.innerHTML = filters.postCount
+            } else {
+                let isChecked = false
+                setFavoritesFilter(isChecked)
+
+                const mainFeed = document.querySelector(".giffygram__feed")
+                mainFeed.innerHTML = PostList()
+
+                const filters = getFilters()
+                const postCount = document.querySelector("#postCount")
+                postCount.innerHTML = filters.postCount
+            }
+        }
+    }
+)
+
+applicationElement.addEventListener(
+    "click",
+    (event) => {
+        if (event.target.id === "clearFilters") {
+            clearFilters()
+            const mainFeed = document.querySelector(".giffygram__feed")
+            const checkBox = document.querySelector("#showOnlyFavorites")
+            checkBox.checked = false
+            mainFeed.innerHTML = PostList()
+
+        }
+    }
+)
+
 export const Footer = () => {
 
     return `<footer class="footer">
@@ -8,7 +91,7 @@ export const Footer = () => {
                         <option>2018</option>
                         <option>2017</option>
                     </select>
-                    <span id="postCount">1</span>
+                
                 </div>
                 <div class="footer__item">
                     Posts by user <select id="userSelection">
@@ -29,6 +112,13 @@ export const Footer = () => {
                 </div>
                 <div class="footer__item">
                 Show only favorites <input id="showOnlyFavorites" type="checkbox">
+                </div>
+                <div>Posts:</div>
+                <div>
+                <span id="postCount"></span>
+                </div>
+                <div>
+                <button id="clearFilters">Clear Filters</button>
                 </div>
             </footer>`
 }

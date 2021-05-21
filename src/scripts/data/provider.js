@@ -8,6 +8,7 @@ const applicationState = {
         displayLikes: false,
         displayMessages: false,
     },
+    filters: {},
     "users": [],
     "posts": [],
     "likes": [],
@@ -86,6 +87,10 @@ export const getFollows = () => {
     return [...applicationState.follows]
 }
 
+export const getFilters = () => {
+    return {...applicationState.filters }
+}
+
 export const addPost = (postObject) => {
     const fetchPost = {
         method: "POST",
@@ -116,4 +121,25 @@ export const sendMessage = (messageObject) => {
         .then(() => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
+}
+export const setDateFilter = (date) => {
+    applicationState.filters.date = date
+}
+
+export const setUserFilter = (userId) => {
+    applicationState.filters.userId = userId
+}
+
+export const setFavoritesFilter = (isChecked) => {
+    applicationState.filters.favoritesOnly = isChecked
+}
+
+export const setPostCount = (postCount) => {
+    applicationState.filters.postCount = postCount
+}
+
+export const clearFilters = () => {
+    applicationState.filters.date = null
+    applicationState.filters.userId = null
+    applicationState.filters.favoritesOnly = null
 }
