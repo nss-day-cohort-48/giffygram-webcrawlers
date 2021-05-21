@@ -14,7 +14,7 @@ applicationElement.addEventListener("click", clickEvent => {
 
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessageIcon") {
-        //when this event happens, it sets the value of messageBox to false, it changes state and renders the html
+        //when this event happens, it sets the value of messageBox to false, it changes state and renders the html for the messageBox
         messageBox = false
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
@@ -23,13 +23,13 @@ applicationElement.addEventListener("click", clickEvent => {
 applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessage__submit") {
         const recipient = applicationElement.querySelector("select[name='directMessage__userSelect']").value
-        const message = applicationElement.querySelector("input[name='message']").value
+        const text = applicationElement.querySelector("input[name='message']").value
         const [, recipientId] = recipient.split("--")
 
         const messageObject = {
             userId: parseInt(localStorage.getItem("gg_user")),
             recipientId: parseInt(recipientId),
-            message: message
+            text: text
         }
 
         sendMessage(messageObject)
@@ -39,7 +39,7 @@ applicationElement.addEventListener("click", clickEvent => {
 
 export const MessageForm = () => {
    const users = getUsers()
-//if messageBox it true, it will return and empty string and nothing will display, else it will return the string in the return statement
+//if messageBox is true, it will return and empty string and nothing will display, else it will return the string in the return statement
     if (messageBox) {
         return ""
     }

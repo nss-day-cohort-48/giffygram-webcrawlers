@@ -155,12 +155,13 @@ export const clearFilters = () => {
   applicationState.filters.date = null;
   applicationState.filters.userId = null;
   applicationState.filters.favoritesOnly = null;
+  applicationState.feed.displayMessages = false
 };
 
-export const getMessageDisplay = () => {
+export const getDisplayMessage = () => {
   return applicationState.feed.displayMessages;
 };
 
-export const setMessageDisplay = () => {
+export const setDisplayMessage = () => {
   applicationState.feed.displayMessages = true;
 };

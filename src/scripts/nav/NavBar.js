@@ -1,4 +1,4 @@
-import { getMessages } from "../data/provider.js"
+import { getMessages, setDisplayMessage, clearFilters } from "../data/provider.js"
 
 document.addEventListener("click", event => {
     if (event.target.id === "logout") {
@@ -9,7 +9,14 @@ document.addEventListener("click", event => {
 
 document.addEventListener("click", event => {
     if (event.target.classList.contains("notification__count")) {
-        setMessageDisplay(true)
+        setDisplayMessage(true)
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
+document.addEventListener("click", event => {
+    if (event.target.id === "logo") {
+        clearFilters()
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
