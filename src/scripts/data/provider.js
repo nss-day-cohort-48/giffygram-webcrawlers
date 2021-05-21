@@ -9,10 +9,10 @@ const applicationState = {
         displayMessages: false,
     },
     filters: {},
-    "users": [],
-    "posts": [],
-    "likes": [],
-    "messages": []
+    users: [],
+    posts: [],
+    likes: [],
+    messages: []
 };
 
 
@@ -101,6 +101,22 @@ export const addPost = (postObject) => {
     }
 
     return fetch(`${apiURL}/posts`, fetchPost)
+        .then(res => res.json())
+        .then(() => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
+export const registerUser = (userObject) => {
+    const fetchPost = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userObject)
+    }
+
+    return fetch(`${apiURL}/users`, fetchPost)
         .then(res => res.json())
         .then(() => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
