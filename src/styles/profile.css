@@ -1,0 +1,36 @@
+.profile {
+    margin-top: 7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileName {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.profileFlexOne {
+    width: 50%;
+    display: flex;
+    border: solid rgb(173, 173, 173) .01rem;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.profileInfo {
+    width: 100%;
+    padding: 2rem;
+}
+
+.profileImage {
+    width: 50%;
+}
+
+.infoSpace {
+    margin: .7rem 0rem .7rem 0rem;
+}
+
+.noProfile {
+    margin: 9rem 0rem 0rem 0rem;
+    text-align: center;
+}
