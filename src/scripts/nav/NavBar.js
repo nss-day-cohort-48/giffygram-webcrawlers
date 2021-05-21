@@ -42,7 +42,7 @@ export const NavBar = () => {
                 </div>
             </div>
             <div class="navigation__item navigation__logout">
-                <button id="logout" class="link">Logout</button>
+                <button id="logout" class="fakeLink">Logout</button>
             </div>
         </nav>
         `
