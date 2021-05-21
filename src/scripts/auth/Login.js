@@ -1,5 +1,7 @@
 import { getUsers } from "../data/provider.js"
 
+const applicationElement = document.querySelector(".giffygram")
+
 
 document.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "loginButton") {
@@ -27,15 +29,15 @@ export const LoginForm = () => {
         <div class="loginForm">
             <form>
                 <fieldset>
-                    <label for="email">Email:</label>
                     <input type="text" name="email" autofocus placeholder="Email address" />
                 </fieldset>
                 <fieldset>
-                    <label for="password">Password:</label>
                     <input type="password" name="password" placeholder="Password" />
                 </fieldset>
             </form>
             <button id="loginButton">Login</button>
+            <div>Don't Have An Account?</div>
+            <button id="signUpButton">Sign Up</button>
         </div>
     `
 }
