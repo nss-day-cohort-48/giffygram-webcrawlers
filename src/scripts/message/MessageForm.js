@@ -24,15 +24,15 @@ applicationElement.addEventListener("click", clickEvent => {
     if (clickEvent.target.id === "directMessage__submit") {
         const recipient = applicationElement.querySelector("select[name='directMessage__userSelect']").value
         const text = applicationElement.querySelector("input[name='message']").value
-        const [, recipientId] = recipient.split("--")
+        const [, recipientId] = recipient.split("--") // the comma is a spread opereater. it spreads the objects in the array into strings seperated by a comma
 
         const messageObject = {
-            userId: parseInt(localStorage.getItem("gg_user")),
-            recipientId: parseInt(recipientId),
+            userId: parseInt(localStorage.getItem("gg_user")), // converting the userId number that is in a string into an integer
+            recipientId: parseInt(recipientId), //turns the number that is in a string, inside of the deconstructed array above, into an integer, and assigning it the varible recipientId
             text: text
         }
 
-        sendMessage(messageObject)
+        sendMessage(messageObject) //invokes the sendMessage function that contains the object with the converted keys
     }
 })
 
