@@ -55,6 +55,15 @@ export const fetchFollows = () => {
     });
 };
 
+
+export const fetchProfiles = () => {
+    return fetch(`${apiURL}/profiles`)
+        .then((res) => res.json())
+        .then((profiles) => {
+            applicationState.profiles = profiles;
+        });
+};
+
 export const deletePost = (id) => {
   return fetch(`${apiURL}/posts/${id}`, {
     method: "DELETE",
@@ -65,6 +74,10 @@ export const deletePost = (id) => {
 
 export const getUsers = () => {
   return [...applicationState.users];
+};
+
+export const getProfiles = () => {
+    return [...applicationState.profiles];
 };
 
 export const getPosts = () => {
@@ -120,6 +133,22 @@ export const sendMessage = (messageObject) => {
     });
 };
 
+export const addProfile = (profileObject) => {
+    const fetchPost = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(profileObject)
+    }
+
+    return fetch(`${apiURL}/profiles`, fetchPost)
+        .then(res => res.json())
+        .then(() => {
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+        })
+}
+
 export const registerUser = (userObject) => {
   const fetchPost = {
     method: "POST",
@@ -135,6 +164,7 @@ export const registerUser = (userObject) => {
       applicationElement.dispatchEvent(new CustomEvent("stateChanged"));
     });
 };
+
 export const setDateFilter = (date) => {
   applicationState.filters.date = date;
 };

@@ -1,7 +1,8 @@
 import { LoginForm } from "./auth/Login.js"
 import { RegisterForm } from "./auth/Register.js"
 import { DirectMessageList } from "./friends/DirectMessage.js"
-import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchUsers, getDisplayMessage } from "./data/provider.js"
+import { fetchFollows, fetchLikes, fetchMessages, fetchPosts, fetchUsers, fetchProfiles, getDisplayMessage } from "./data/provider.js"
+
 import { GiffyGram } from "./GiffyGram.js"
 
 
@@ -23,6 +24,7 @@ export const renderApp = () => {
         .then(fetchLikes)
         .then(fetchMessages)
         .then(fetchFollows)
+        .then(fetchProfiles)
         .then(() => {
             const displayMessages = getDisplayMessage()
             if (displayMessages) {
