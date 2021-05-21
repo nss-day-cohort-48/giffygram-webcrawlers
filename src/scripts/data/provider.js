@@ -143,3 +143,13 @@ export const clearFilters = () => {
     applicationState.filters.userId = null
     applicationState.filters.favoritesOnly = null
 }
+
+
+export const getMessageDisplay = () => {
+return applicationState.feed.displayMessages
+}
+
+export const setMessageDisplay = () => {
+applicationState.feed.displayMessages = true
+}
+

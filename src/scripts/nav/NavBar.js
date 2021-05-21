@@ -7,6 +7,13 @@ document.addEventListener("click", event => {
     }
 })
 
+document.addEventListener("click", event => {
+    if (event.target.classList.contains("notification__count")) {
+        setMessageDisplay(true)
+        document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
 export const NavBar = () => {
     const messages = getMessages()
 
@@ -22,12 +29,13 @@ export const NavBar = () => {
             </div>
             <div class="navigation__item navigation__message">
                 <img id="directMessageIcon" src="/images/fountain-pen.svg" alt="Direct message" />
+                
                 <div class="notification__count">
                     ${ messages.length }
                 </div>
             </div>
             <div class="navigation__item navigation__logout">
-                <button id="logout" class="fakeLink">Logout</button>
+                <button id="logout" class="link">Logout</button>
             </div>
         </nav>
         `
