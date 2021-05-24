@@ -51,7 +51,7 @@ export const MessageForm = () => {
                     <select name="directMessage__userSelect" class="message__input">
                         <option>Choose a recipient...</option>
                         ${
-                            users.map(
+                            users.map( //this method will convert the objects returned into html string representations, and return a new array of the converted strings 
                                 (user) => {
                                     return `<option value="messageRecipient--${user.id}">${user.name}</option>
                                 `})
