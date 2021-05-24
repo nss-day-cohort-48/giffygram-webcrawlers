@@ -72,6 +72,30 @@ export const deletePost = (id) => {
   });
 };
 
+export const postLikes = (likeObject) => {
+      const fetchPost = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(likeObject),
+    };
+  
+  return fetch(`${apiURL}/likes`, fetchPost)
+      .then((res) => res.json())
+      .then((likes) => {
+          applicationState.likes = likes;
+      });
+};
+
+export const deleteLikes = (id) => {
+  return fetch(`${apiURL}/likes/${id}`, {
+    method: "DELETE",
+  }).then(() => {
+    applicationElement.dispatchEvent(new CustomEvent("stateChanged"));
+  });
+};
+
 export const getUsers = () => {
   return [...applicationState.users];
 };
@@ -115,6 +139,10 @@ export const addPost = (postObject) => {
       applicationElement.dispatchEvent(new CustomEvent("stateChanged"));
     });
 };
+
+
+
+
 
 export const sendMessage = (messageObject) => {
   const fetchMessage = {
