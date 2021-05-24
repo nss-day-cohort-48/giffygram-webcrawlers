@@ -23,7 +23,7 @@ document.addEventListener("click", event => {
 
 export const NavBar = () => {
     const messages = getMessages()
-
+    const currentUser = parseInt(localStorage.getItem("gg_user"))
     return `
         <nav class="navigation">
             <div class="navigation__item navigation__icon">
@@ -38,7 +38,7 @@ export const NavBar = () => {
                 <img id="directMessageIcon" src="/images/fountain-pen.svg" alt="Direct message" />
                 
                 <div class="notification__count">
-                    ${ messages.length }
+                    ${ messages.filter(message => currentUser === message.recipientId).length }
                 </div>
             </div>
             <div class="navigation__item navigation__logout">
