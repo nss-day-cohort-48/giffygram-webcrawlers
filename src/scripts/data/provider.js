@@ -72,6 +72,29 @@ export const deletePost = (id) => {
   });
 };
 
+
+
+
+export const fetchpostLike = () => {
+  return fetch(`${apiURL}/postLike`)
+      .then((res) => res.json())
+      .then((likes) => {
+          applicationState.likes = likes;
+      });
+};
+
+export const deleteLikes = (id) => {
+  return fetch(`${apiURL}/likes/${id}`, {
+    method: "DELETE",
+  }).then(() => {
+    applicationElement.dispatchEvent(new CustomEvent("stateChanged"));
+  });
+};
+
+
+
+
+
 export const getUsers = () => {
   return [...applicationState.users];
 };
@@ -148,6 +171,8 @@ export const addProfile = (profileObject) => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
+
+
 
 export const registerUser = (userObject) => {
   const fetchPost = {

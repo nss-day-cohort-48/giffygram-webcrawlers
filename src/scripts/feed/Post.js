@@ -1,4 +1,4 @@
-import { getFilters, setUserFilter } from "../data/provider.js"
+import { getFilters, getLikes, setUserFilter,getUsers deletelikes} from "../data/provider.js"
 import { UserProfile } from "../profile/UserProfile.js"
 import { PostList } from "./PostList.js"
 
@@ -27,11 +27,26 @@ applicationElement.addEventListener("click", event => {
         const yellowStarHtml = `<img id="favoritePost--${postId}" class="actionIcon" src="/images/favorite-star-yellow.svg">`
         const blankStarHtml = `<img id="favoritePost--${postId}" class="actionIcon" src="/images/favorite-star-blank.svg">`
         if (targetPost.innerHTML === yellowStarHtml) {
-            targetPost.innerHTML = blankStarHtml
-                // delete favorite object from user
+            targetPost.innerHTML = blankStarHtml  
+            const deleteLikes {
+                deleteLike ( post.id)            }
+
+                // delete favorite object from user deletelikes
+                deleteLikes(postToAPI) 
+                
         } else {
             targetPost.innerHTML = yellowStarHtml
+            const user = parseInt(localStorage.getItem("gg_user"))
+            const postToAPI = {
+                postId: postId,
+                userId: user
+                
                 // add favorite object to user
+            }
+            postLike(postToAPI)
+        }
+                
+            
         }
     }
 })
