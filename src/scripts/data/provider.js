@@ -211,6 +211,7 @@ export const clearFilters = () => {
   applicationState.filters.userId = null;
   applicationState.filters.favoritesOnly = null;
   applicationState.feed.displayMessages = false
+ 
 };
 
 export const getDisplayMessage = () => {
