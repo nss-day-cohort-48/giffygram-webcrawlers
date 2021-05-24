@@ -37,14 +37,15 @@ applicationElement.addEventListener("click", (event) => {
             location: document.querySelector("#profileLocation").value,
             about: document.querySelector("#profileAbout").value,
         };
-        updateProfile(profileUpdate);
+        updateProfile(profileUpdate)
+        applicationElement.innerHTML = UserProfile(userId)
     }
 });
 
 applicationElement.addEventListener("click", event => {
     if (event.target.id === "newProfile__cancel") {
         const userId = parseInt(localStorage.getItem("gg_user"));
-        UserProfile(userId)
+        applicationElement.innerHTML = UserProfile(userId)
     }
 })
 
