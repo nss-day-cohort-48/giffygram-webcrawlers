@@ -6,7 +6,7 @@ import { PostList } from "./PostList.js"
 const applicationElement = document.querySelector(".giffygram")
 
 applicationElement.addEventListener("click", event => {
-    if (event.target.id.startsWith("profile")) {
+    if (event.target.id.startsWith("profile--")) {
         const [, userId] = event.target.id.split("--")
         applicationElement.innerHTML = UserProfile(parseInt(userId))
         setUserFilter(parseInt(userId))

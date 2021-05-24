@@ -1,5 +1,6 @@
 import { addProfile, getProfiles, getUsers } from "../data/provider.js"
 import { ProfileSetup } from "./ProfileSetup.js"
+import { ProfileUpdate } from "./ProfileUpdate.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -24,23 +25,27 @@ applicationElement.addEventListener("click", event => {
 })
 
 export const Profile = (userId) => {
-    const profiles = getProfiles()
-    const users = getUsers()
-    const userProfile = profiles.find(profile => profile.userId === userId)
-    const user = users.find(user => user.id === userId)
-    return `
+        const loggedInUser = parseInt(localStorage.getItem("gg_user"))
+        const profiles = getProfiles()
+        const users = getUsers()
+        const userProfile = profiles.find(profile => profile.userId === userId)
+        const user = users.find(user => user.id === userId)
+        return `
     <section class="profile">
         <h1 class="profileName">${user.name}</h1>
         <div class="profileFlexOne">
             <img class="profileImage" src="${userProfile.pic}">
             <div class="profileInfo">
-                <div class="infoSpace"><b>Age:</b>  ${userProfile.age}</div>
-                <div class="infoSpace"><b>Location:</b>  ${userProfile.location}</div>
+                <div class="editDiv">
+                    <div class="infoSpace editDiv"><b>Age:</b>  <div class="age">${userProfile.age}</div></div>
+                    <div class="editIcon"><img id="editIcon" ${user.id === loggedInUser ? `src="../images/edit.svg"` : ``}></div>
+                </div>
+                <div class="infoSpace location"><b>Location:</b>${userProfile.location}</div>
                 <div>
                 <h4>About Me:</h4>
-                <div>${userProfile.about}</div>
+                <div class="about">${userProfile.about}</div>
                 </div>
-                <div class="infoSpace"><b>Contact:  </b>${user.email}</div>
+                <div class="infoSpace contact"><b>Contact:  </b>${user.email}</div>
             </div>
          </div>
     </section>
