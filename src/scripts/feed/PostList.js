@@ -2,7 +2,7 @@ import { getFilters, getLikes, getPosts, getUsers, setPostCount } from '../data/
 import { Post } from '../feed/Post.js'
 
 export const PostList = () => {
-    //const likes = getLikes()
+    
     const posts = getPosts()
     const filteredPosts = filterPosts(posts)
     const users = getUsers()
