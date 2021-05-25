@@ -1,11 +1,20 @@
-import { getMessages, getUsers, markMessageAsRead } from "../data/provider.js"
+import { getMessages, getUsers, markMessageAsRead, deleteMessage } from "../data/provider.js"
 
 document.addEventListener("click", clickEvent => {
     if (clickEvent.target.id.startsWith("markAsRead--")) {
         const [, messageId] = clickEvent.target.id.split("--")
+        
         markMessageAsRead(parseInt(messageId))
     }
 })
+
+document.addEventListener("click", clickEvent => {
+    if (clickEvent.target.id.startsWith("deleteMessage--")) {
+        const [, messageId] = clickEvent.target.id.split("--")
+        deleteMessage(parseInt(messageId))
+    }
+})
+
 
 export const MessageList = () => {
     const messages = getMessages()
@@ -21,6 +30,7 @@ export const MessageList = () => {
                         <div class="message__author">From ${sender.name}</div>
                         <div class="message__text">${message.text}</div>
                         <button id="markAsRead--${message.id}">mark as read</button>
+                        <button id="deleteMessage--${message.id}">Delete Message</button>
                     </div>`
             }).join("")
         }
