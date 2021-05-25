@@ -15,7 +15,7 @@ export const ProfileSetup = () => {
         <textarea name="profileAbout" id="profileAbout" class="newPost__input newPost__description" placeholder="Tell us about yourself..."></textarea>
 
         <button id="newProfileSubmit">Save</button>
-        <button id="newProfile__cancel">Cancel</button>
+        <button id="newProfileCancel">Cancel</button>
     </div>
     `
 }
