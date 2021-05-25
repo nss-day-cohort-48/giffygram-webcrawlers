@@ -13,6 +13,10 @@ const applicationState = {
     posts: [],
     likes: [],
     messages: [],
+    view: {
+        onProfile: false,
+        userId: null
+    }
 };
 
 export const fetchUsers = () => {
@@ -129,6 +133,10 @@ export const getFilters = () => {
     return {...applicationState.filters };
 };
 
+export const getView = () => {
+    return {...applicationState.view }
+}
+
 export const addPost = (postObject) => {
     const fetchPost = {
         method: "POST",
@@ -240,3 +248,9 @@ export const getDisplayMessage = () => {
 export const setDisplayMessage = () => {
     applicationState.feed.displayMessages = true;
 };
+
+export const setView = (onProfile, userId) => {
+    const view = applicationState.view
+    view.onProfile = onProfile
+    view.userId = userId
+}
