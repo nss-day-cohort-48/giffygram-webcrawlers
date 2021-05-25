@@ -1,5 +1,5 @@
 import { NavBar } from "../nav/NavBar.js";
-import { MessageList } from "../feed/MessageList.js";
+import { MessageList } from "../message/MessageList.js";
 
 export const DirectMessageList = () => {
   return `
