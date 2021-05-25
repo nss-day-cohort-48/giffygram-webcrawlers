@@ -1,6 +1,7 @@
 import { clearFilters, getFilters, setDateFilter, setFavoritesFilter, setUserFilter } from "../data/provider.js"
 import { PostList } from "../feed/PostList.js"
 
+
 const applicationElement = document.querySelector(".giffygram")
 
 
@@ -81,29 +82,34 @@ applicationElement.addEventListener(
     }
 )
 
-const button = document.querySelector(".btn-toggle");
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+
+let button = document.querySelector("#btn-toggle");
+let prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
 const currentTheme = localStorage.getItem("theme");
 if (currentTheme == "dark") {
-  document.body.classList.toggle("dark-theme");
+    document.body.classList.toggle("dark-theme");
 } else if (currentTheme == "light") {
-  document.body.classList.toggle("light-theme");
+    document.body.classList.toggle("light-theme");
 }
 
-document.addEventListener("click", event => {
-  if (prefersDarkScheme.matches) {
-    document.body.classList.toggle("light-theme");
-    var theme = document.body.classList.contains("light-theme")
-      ? "light"
-      : "dark";
-  } else {
-    document.body.classList.toggle("dark-theme");
-    var theme = document.body.classList.contains("dark-theme")
-      ? "dark"
-      : "light";
-  }
-  localStorage.setItem("theme", theme);
+document.addEventListener("click", (clickEvent) => {
+if (clickEvent.target.id === "btn-toggle"){
+//button.addEventListener('click', ()=>{    
+    if (prefersDarkScheme.matches) {
+        document.body.classList.toggle("light-theme");
+        var theme = document.body.classList.contains("light-theme")
+            ? "light"
+            : "dark";
+    } else {
+        document.body.classList.toggle("dark-theme");
+        var theme = document.body.classList.contains("dark-theme")
+            ? "dark"
+            : "light";
+    }
+    localStorage.setItem("theme", theme);
+}
 });
 
 export const Footer = () => {

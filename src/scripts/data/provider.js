@@ -238,9 +238,5 @@ export const getDisplayMessage = () => {
 };
 
 export const setDisplayMessage = () => {
-<<<<<<< HEAD
-  applicationState.feed.displayMessages = true;
-=======
     applicationState.feed.displayMessages = true;
->>>>>>> 19467b0dc88b021c433e9c0506dcd0beae8e19d6
 };
