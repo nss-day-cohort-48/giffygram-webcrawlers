@@ -23,7 +23,7 @@ textarea {
     margin: 0;
 }
 
-h1,
+
 h2,
 h3,
 h4,
@@ -64,3 +64,42 @@ h6 {
 #logo {
     cursor: pointer;
 }
+
+body {
+    --text-color: #222;
+    --bkg-color: #fff;
+  }
+  body.dark-theme {
+    --text-color: #eee;
+    --bkg-color: #121212;
+  }
+
+  #clearFilters {
+    margin-left:1rem;
+      }
+
+  #btn-toggle {
+    margin-left:30rem;
+      }
+  
+  @media (prefers-color-scheme: dark) {
+    /* defaults to dark theme. it allows change the background color of the <body> element */
+    body {
+      --text-color: #eee;
+      --bkg-color: #121212;
+    }
+    body.light-theme {
+      --text-color: #222;
+      --bkg-color: #fff;
+    }
+  }
+  
+  
+  body {
+    background: var(--bkg-color);
+  }
+  /* var function is used to insert the value of a CSS variable since variables have access to the DOM. it allows there to be a way of defining some colors in a style sheet by defining the colors to use, for each specific element*/
+  h1
+  {
+    color: var(--text-color);
+  }

@@ -63,6 +63,7 @@ export const NavBar = () => {
             <div class="navigation__item navigation__name">
                 Giffygram
             </div>
+            
             <div class="navigation__item navigation__search">
             </div>
             <div class="navigation__item navigation__message">

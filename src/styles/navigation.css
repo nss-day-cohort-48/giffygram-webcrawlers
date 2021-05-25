@@ -1,6 +1,6 @@
 .navigation {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: start;
     border-bottom: 1px solid lightblue;
     padding: 0.5em 0 0.5em 1em;
@@ -67,3 +67,4 @@
 #directMessageIcon {
     cursor: pointer;
 }
+
