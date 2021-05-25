@@ -1,11 +1,15 @@
-import { getFilters, getLikes, getPosts, getUsers, setDateFilter, setPostCount } from '../data/provider.js'
+import { getFilters, getLikes, getPosts, getProfiles, getUsers, setPostCount } from '../data/provider.js'
 import { Post } from '../feed/Post.js'
 
 export const PostList = () => {
-    
+
+    const user = parseInt(localStorage.getItem("gg_user"))
     const posts = getPosts()
     const filteredPosts = filterPosts(posts)
     const users = getUsers()
+    const blankStar = `src="/images/favorite-star-blank.svg"`
+    const yellowStar = `src="/images/favorite-star-yellow.svg"`
+    const likedByUserArray = getLikes().filter(like => like.userId === user)
 
     let postCount = 0
     let html = ""
@@ -13,8 +17,13 @@ export const PostList = () => {
         postCount++
         const user = users.find(user =>
             user.id === post.userId)
-
-        html += Post(post, user)
+        let star = blankStar
+        for (const like of likedByUserArray) {
+            if (like.postId === post.id) {
+                star = yellowStar
+            }
+        }
+        html += Post(post, user, star)
     }
     setPostCount(postCount)
     return html
