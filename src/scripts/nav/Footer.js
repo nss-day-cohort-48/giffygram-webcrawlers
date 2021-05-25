@@ -81,6 +81,31 @@ applicationElement.addEventListener(
     }
 )
 
+const button = document.querySelector(".btn-toggle");
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+const currentTheme = localStorage.getItem("theme");
+if (currentTheme == "dark") {
+  document.body.classList.toggle("dark-theme");
+} else if (currentTheme == "light") {
+  document.body.classList.toggle("light-theme");
+}
+
+document.addEventListener("click", event => {
+  if (prefersDarkScheme.matches) {
+    document.body.classList.toggle("light-theme");
+    var theme = document.body.classList.contains("light-theme")
+      ? "light"
+      : "dark";
+  } else {
+    document.body.classList.toggle("dark-theme");
+    var theme = document.body.classList.contains("dark-theme")
+      ? "dark"
+      : "light";
+  }
+  localStorage.setItem("theme", theme);
+});
+
 export const Footer = () => {
 
     return `<footer class="footer">
@@ -120,5 +145,9 @@ export const Footer = () => {
                 <div>
                 <button id="clearFilters">Clear Filters</button>
                 </div>
+                <div><span id="darkMode"></span></div>
+                <div class="navigation__item navigation__darkmode">
+            <button id="btn-toggle" class="toggleBtn">Dark-Mode</button>
+            </div>
             </footer>`
 }

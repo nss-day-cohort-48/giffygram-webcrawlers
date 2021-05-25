@@ -72,11 +72,16 @@ export const deletePost = (id) => {
   });
 };
 
-
-
-
-export const fetchpostLike = () => {
-  return fetch(`${apiURL}/postLike`)
+export const postLikes = (likeObject) => {
+      const fetchPost = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(likeObject),
+    };
+  
+  return fetch(`${apiURL}/likes`, fetchPost)
       .then((res) => res.json())
       .then((likes) => {
           applicationState.likes = likes;
@@ -90,10 +95,6 @@ export const deleteLikes = (id) => {
     applicationElement.dispatchEvent(new CustomEvent("stateChanged"));
   });
 };
-
-
-
-
 
 export const getUsers = () => {
   return [...applicationState.users];
@@ -139,6 +140,10 @@ export const addPost = (postObject) => {
     });
 };
 
+
+
+
+
 export const sendMessage = (messageObject) => {
   const fetchMessage = {
     method: "POST",
@@ -171,8 +176,6 @@ export const addProfile = (profileObject) => {
             applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
         })
 }
-
-
 
 export const registerUser = (userObject) => {
   const fetchPost = {

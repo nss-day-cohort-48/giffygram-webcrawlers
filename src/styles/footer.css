@@ -16,3 +16,38 @@
 .footer__item {
     margin: 0 1rem;
 }
+
+@media (prefers-color-scheme: dark) {
+    /* defaults to dark theme */
+body {
+    --text-color: #222;
+    --bkg-color: #fff;
+  }
+  #btn-toggle{
+margin-left:20rem;
+  }
+  body.dark-theme {
+    --text-color: #eee;
+    --bkg-color: #121212;
+  }
+  
+  
+    body {
+      --text-color: #eee;
+      --bkg-color: #121212;
+    }
+    body.light-theme {
+      --text-color: #222;
+      --bkg-color: #fff;
+    }
+  }
+  
+
+  
+  body {
+    background: var(--bkg-color);
+  }
+  
+  h1 {
+    color: var(--text-color);
+  }

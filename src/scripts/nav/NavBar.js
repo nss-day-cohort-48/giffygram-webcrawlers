@@ -21,6 +21,8 @@ document.addEventListener("click", event => {
     }
 })
 
+
+
 export const NavBar = () => {
     const messages = getMessages()
     const currentUser = parseInt(localStorage.getItem("gg_user"))
@@ -32,6 +34,7 @@ export const NavBar = () => {
             <div class="navigation__item navigation__name">
                 Giffygram
             </div>
+            
             <div class="navigation__item navigation__search">
             </div>
             <div class="navigation__item navigation__message">

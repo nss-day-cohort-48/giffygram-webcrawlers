@@ -1,4 +1,4 @@
-import { getFilters, getLikes, setUserFilter,getUsers deletelikes} from "../data/provider.js"
+import { getFilters, getLikes, setUserFilter, getUsers, deleteLikes, postLikes } from "../data/provider.js"
 import { UserProfile } from "../profile/UserProfile.js"
 import { PostList } from "./PostList.js"
 
@@ -27,30 +27,22 @@ applicationElement.addEventListener("click", event => {
         const yellowStarHtml = `<img id="favoritePost--${postId}" class="actionIcon" src="/images/favorite-star-yellow.svg">`
         const blankStarHtml = `<img id="favoritePost--${postId}" class="actionIcon" src="/images/favorite-star-blank.svg">`
         if (targetPost.innerHTML === yellowStarHtml) {
-            targetPost.innerHTML = blankStarHtml  
-            const deleteLikes {
-                deleteLike ( post.id)            }
-
-                // delete favorite object from user deletelikes
-                deleteLikes(postToAPI) 
-                
+            targetPost.innerHTML = blankStarHtml
+          deleteLikes(parseInt(postId))
+        // delete favorite object from user
         } else {
             targetPost.innerHTML = yellowStarHtml
             const user = parseInt(localStorage.getItem("gg_user"))
             const postToAPI = {
-                postId: postId,
+                postId: parseInt(postId),
                 userId: user
-                
+
                 // add favorite object to user
             }
-            postLike(postToAPI)
-        }
-                
-            
+            postLikes(postToAPI)
         }
     }
 })
-
 
 export const Post = (post, user) => {
     return `<section class="post">
@@ -65,7 +57,7 @@ export const Post = (post, user) => {
             <a href="#" class="profileLink" id="profile--${user.id}">
             ${user.name}
             </a>
-            on ${new Date(post.timestamp).toLocaleString("en-US", {month: "numeric", day: "numeric", year: "numeric"})}
+            on ${new Date(post.timestamp).toLocaleString("en-US", { month: "numeric", day: "numeric", year: "numeric" })}
         </div>
         <div class="post__actions">
             <div class="favoritePost--${post.id}">
