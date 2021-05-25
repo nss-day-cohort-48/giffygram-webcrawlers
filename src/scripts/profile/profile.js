@@ -36,24 +36,29 @@ export const Profile = (userId) => {
         const users = getUsers()
         const userProfile = profiles.find(profile => profile.userId === userId)
         const user = users.find(user => user.id === userId)
-        return `
-    <section class="profile">
-        <h1 class="profileName">${user.name}</h1>
-        <div class="profileFlexOne">
-            <img class="profileImage" src="${userProfile.pic}">
-            <div class="profileInfo">
-                <div class="editDiv">
-                    <div class="infoSpace editDiv"><b>Age:</b>  <div class="age">${userProfile.age}</div></div>
-                    <div class="editIcon"><img id="editIcon" ${user.id === loggedInUser ? `src="../images/edit.svg"` : ``}></div>
+        if (userProfile) {
+            return `
+        <section class="profile">
+            <h1 class="profileName">${user.name}</h1>
+            <div class="profileFlexOne">
+                <img class="profileImage" src="${userProfile.pic}">
+                <div class="profileInfo">
+                    <div class="editDiv">
+                        <div class="infoSpace editDiv"><b>Age:</b>  <div class="age">${userProfile.age}</div></div>
+                        <div class="editIcon"><img id="editIcon" ${user.id === loggedInUser ? `src="../images/edit.svg"` : ``}></div>
+                    </div>
+                    <div class="infoSpace location"><b>Location:</b>${userProfile.location}</div>
+                    <div>
+                    <h4>About Me:</h4>
+                    <div class="about">${userProfile.about}</div>
+                    </div>
+                    <div class="infoSpace contact"><b>Contact:  </b>${user.email}</div>
                 </div>
-                <div class="infoSpace location"><b>Location:</b>${userProfile.location}</div>
-                <div>
-                <h4>About Me:</h4>
-                <div class="about">${userProfile.about}</div>
-                </div>
-                <div class="infoSpace contact"><b>Contact:  </b>${user.email}</div>
-            </div>
-         </div>
-    </section>
-    `
+             </div>
+        </section>`
+        } else {
+            return `<div class="userNoProfile">
+            <div>It appears that ${user.name} has not set up their profile</div>
+            </div>`
+        }
 }

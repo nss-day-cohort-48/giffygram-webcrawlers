@@ -48,3 +48,16 @@
 .userUpdate {
     width: 50%;
 }
+
+.userNoProfile {
+    height: 5rem;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10rem;
+    border: black solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
