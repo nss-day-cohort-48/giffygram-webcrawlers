@@ -70,7 +70,7 @@ export const NavBar = () => {
                 <img id="directMessageIcon" src="/images/fountain-pen.svg" alt="Direct message" />
                 
                 <div class="notification__count">
-                    ${ messages.filter(message => currentUser === message.recipientId).length }
+                    ${ messages.filter(message => currentUser === message.recipientId && message.read === false).length }
                 </div>
             </div>
             <div class="navigation__item navigation__profile">

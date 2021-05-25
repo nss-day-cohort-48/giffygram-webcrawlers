@@ -249,8 +249,25 @@ export const setDisplayMessage = () => {
     applicationState.feed.displayMessages = true;
 };
 
+export const markMessageAsRead = (messageId) => {
+  return fetch(`${apiURL}/messages/${messageId}`, {
+    headers: { "Content-Type": "application/json" },
+    method: "PATCH",
+    body: JSON.stringify({read: true}),
+  }).then(() => {
+    applicationElement.dispatchEvent(new CustomEvent("stateChanged"));
+  });
+};
 export const setView = (onProfile, userId) => {
     const view = applicationState.view
     view.onProfile = onProfile
     view.userId = userId
 }
+
+export const deleteMessage = (id) => {
+  return fetch(`${apiURL}/messages/${id}`, {
+      method: "DELETE",
+  }).then(() => {
+      applicationElement.dispatchEvent(new CustomEvent("stateChanged"));
+  });
+};

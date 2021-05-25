@@ -5,7 +5,7 @@ const applicationElement = document.querySelector(".giffygram")
 let messageBox = true
 
 applicationElement.addEventListener("click", clickEvent => {
-    if (clickEvent.target.id === "directMessage__close") {
+    if (clickEvent.target.id === "directMessage__cancel") {
         //when this event happens, it sets the value of messageBox to true
         messageBox = true
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
@@ -29,7 +29,8 @@ applicationElement.addEventListener("click", clickEvent => {
         const messageObject = {
             userId: parseInt(localStorage.getItem("gg_user")), // converting the userId number that is in a string into an integer
             recipientId: parseInt(recipientId), //turns the number that is in a string, inside of the deconstructed array above, into an integer, and assigning it the varible recipientId
-            text: text
+            text: text,
+            read: false
         }
 
         sendMessage(messageObject) //invokes the sendMessage function that contains the object with the converted keys
@@ -40,8 +41,7 @@ applicationElement.addEventListener("click", clickEvent => {
 export const MessageForm = () => {
    const users = getUsers()
 //if messageBox is true, it will return and empty string and nothing will display, else it will return the string in the return statement
-    if (messageBox) {
-        return ""
+    if (messageBox === true) {
     }
     else { 
         return ` 
@@ -69,7 +69,6 @@ export const MessageForm = () => {
                 <button id="directMessage__submit">Save</button>
                 <button id="directMessage__cancel">Cancel</button>
 
-                <button id="directMessage__close">x</button>
 
             </div>
         `
