@@ -1,4 +1,4 @@
-import { getFilters, getLikes, setUserFilter, getUsers, deleteLikes, postLikes, fetchLikes, getView, setView } from "../data/provider.js"
+import { getFilters, getLikes, setUserFilter, getUsers, deleteLikes, postLikes, fetchLikes, getView, setView, deletePost } from "../data/provider.js"
 import { UserProfile } from "../profile/UserProfile.js"
 import { PostList } from "./PostList.js"
 
@@ -45,6 +45,18 @@ applicationElement.addEventListener("click", event => {
             }
             postLikes(postToAPI)
         }
+    }
+})
+
+
+
+mainContainer.addEventListener("click", click => {
+    if (click.target.id.startsWith("blockPost--")) {
+        const user = parseInt(localStorage.getItem("gg_user"))
+        const [,postId] = click.target.id.split("--")
+        deletePost(parseInt(postId))
+        const targetPost = document.querySelector(`.blockPost--${postId}`)
+        const trashHtml = `<img id="blockPost--${postId}" class="actionIcon" src="/images/block.svg">`
     }
 })
 
