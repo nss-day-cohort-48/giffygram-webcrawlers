@@ -1,4 +1,4 @@
-import { getFilters, getLikes, setUserFilter, getUsers, deleteLikes, postLikes } from "../data/provider.js"
+import { getFilters, getLikes, setUserFilter, getUsers, deleteLikes, postLikes, fetchLikes } from "../data/provider.js"
 import { UserProfile } from "../profile/UserProfile.js"
 import { PostList } from "./PostList.js"
 
@@ -6,7 +6,7 @@ import { PostList } from "./PostList.js"
 const applicationElement = document.querySelector(".giffygram")
 
 applicationElement.addEventListener("click", event => {
-    if (event.target.id.startsWith("profile")) {
+    if (event.target.id.startsWith("profile--")) {
         const [, userId] = event.target.id.split("--")
         applicationElement.innerHTML = UserProfile(parseInt(userId))
         setUserFilter(parseInt(userId))
@@ -22,17 +22,20 @@ applicationElement.addEventListener("click", event => {
 
 applicationElement.addEventListener("click", event => {
     if (event.target.id.startsWith("favoritePost")) {
+        const user = parseInt(localStorage.getItem("gg_user"))
         const [, postId] = event.target.id.split("--")
         const targetPost = document.querySelector(`.favoritePost--${postId}`)
         const yellowStarHtml = `<img id="favoritePost--${postId}" class="actionIcon" src="/images/favorite-star-yellow.svg">`
         const blankStarHtml = `<img id="favoritePost--${postId}" class="actionIcon" src="/images/favorite-star-blank.svg">`
+
         if (targetPost.innerHTML === yellowStarHtml) {
             targetPost.innerHTML = blankStarHtml
-          deleteLikes(parseInt(postId))
-        // delete favorite object from user
+            const likedByUserArray = getLikes().filter(like => like.userId === user)
+            const like = likedByUserArray.find(like => like.postId === parseInt(postId))
+            deleteLikes(like.id)
+                // delete favorite object from user
         } else {
             targetPost.innerHTML = yellowStarHtml
-            const user = parseInt(localStorage.getItem("gg_user"))
             const postToAPI = {
                 postId: parseInt(postId),
                 userId: user
@@ -44,7 +47,7 @@ applicationElement.addEventListener("click", event => {
     }
 })
 
-export const Post = (post, user) => {
+export const Post = (post, user, star) => {
     return `<section class="post">
         <header>
             <h2 class="post__title">${post.title}</h2>
@@ -60,9 +63,7 @@ export const Post = (post, user) => {
             on ${new Date(post.timestamp).toLocaleString("en-US", { month: "numeric", day: "numeric", year: "numeric" })}
         </div>
         <div class="post__actions">
-            <div class="favoritePost--${post.id}">
-                <img id="favoritePost--${post.id}" class="actionIcon" src="/images/favorite-star-blank.svg">
-            </div>
+            <div class="favoritePost--${post.id}"><img id="favoritePost--${post.id}" class="actionIcon" ${star}></div>
             <div>
             </div>
         </div>

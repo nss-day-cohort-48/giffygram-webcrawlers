@@ -34,3 +34,17 @@
     margin: 9rem 0rem 0rem 0rem;
     text-align: center;
 }
+
+.editDiv {
+    position: relative;
+    display: flex;
+}
+
+#editIcon {
+    position: absolute;
+    right: 0;
+}
+
+.userUpdate {
+    width: 50%;
+}

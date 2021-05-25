@@ -10,8 +10,8 @@ export const UserProfile = (userId) => {
     ${NavBar()}
     ${MessageForm()}
     ${Profile(userId)}
-<div class="giffygram__feed">
-${ PostList() } 
-</div>
-${Footer()}`
+    <div class="giffygram__feed">
+    ${ PostList() } 
+    </div>
+    ${Footer()}`
 };
