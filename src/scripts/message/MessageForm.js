@@ -5,7 +5,7 @@ const applicationElement = document.querySelector(".giffygram")
 let messageBox = true
 
 applicationElement.addEventListener("click", clickEvent => {
-    if (clickEvent.target.id === "directMessage__close") {
+    if (clickEvent.target.id === "directMessage__cancel") {
         //when this event happens, it sets the value of messageBox to true
         messageBox = true
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
@@ -69,7 +69,6 @@ export const MessageForm = () => {
                 <button id="directMessage__submit">Save</button>
                 <button id="directMessage__cancel">Cancel</button>
 
-                <button id="directMessage__close">x</button>
 
             </div>
         `
