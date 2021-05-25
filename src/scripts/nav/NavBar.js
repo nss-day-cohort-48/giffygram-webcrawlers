@@ -1,4 +1,4 @@
-import { getMessages, setDisplayMessage, clearFilters, setUserFilter, getFilters, getProfiles } from "../data/provider.js"
+import { getMessages, setDisplayMessage, clearFilters, setUserFilter, getFilters, getProfiles, setView } from "../data/provider.js"
 import { PostList } from "../feed/PostList.js"
 import { ProfileSetup } from "../profile/ProfileSetup.js"
 import { UserProfile } from "../profile/UserProfile.js"
@@ -22,6 +22,7 @@ document.addEventListener("click", event => {
 document.addEventListener("click", event => {
     if (event.target.id === "logo") {
         clearFilters()
+        setView(false)
         document.querySelector(".giffygram").dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
