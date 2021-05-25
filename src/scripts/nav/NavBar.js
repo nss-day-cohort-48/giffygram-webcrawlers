@@ -1,4 +1,9 @@
-import { getMessages, setDisplayMessage, clearFilters } from "../data/provider.js"
+import { getMessages, setDisplayMessage, clearFilters, setUserFilter, getFilters, getProfiles } from "../data/provider.js"
+import { PostList } from "../feed/PostList.js"
+import { ProfileSetup } from "../profile/ProfileSetup.js"
+import { UserProfile } from "../profile/UserProfile.js"
+
+const applicationElement = document.querySelector(".giffygram")
 
 document.addEventListener("click", event => {
     if (event.target.id === "logout") {
@@ -21,6 +26,31 @@ document.addEventListener("click", event => {
     }
 })
 
+document.addEventListener("click", event => {
+    if (event.target.id === "navigationProfile") {
+        const user = parseInt(localStorage.getItem("gg_user"))
+        const profiles = getProfiles()
+        let hasProfile = false
+        for (const profile of profiles) {
+            if (profile.userId === user) {
+                hasProfile = true
+            }
+        }
+        if (hasProfile) {
+            applicationElement.innerHTML = UserProfile(user)
+            setUserFilter(user)
+            const mainFeed = document.querySelector(".giffygram__feed")
+            mainFeed.innerHTML = PostList()
+            const filters = getFilters()
+            const postCount = document.querySelector("#postCount")
+            postCount.innerHTML = filters.postCount
+
+        } else {
+            applicationElement.innerHTML = ProfileSetup()
+        }
+    }
+})
+
 export const NavBar = () => {
     const messages = getMessages()
     const currentUser = parseInt(localStorage.getItem("gg_user"))
@@ -40,6 +70,9 @@ export const NavBar = () => {
                 <div class="notification__count">
                     ${ messages.filter(message => currentUser === message.recipientId).length }
                 </div>
+            </div>
+            <div class="navigation__item navigation__profile">
+                <img id="navigationProfile" src="../images/profile.svg">
             </div>
             <div class="navigation__item navigation__logout">
                 <button id="logout" class="fakeLink">Logout</button>

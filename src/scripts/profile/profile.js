@@ -24,6 +24,12 @@ applicationElement.addEventListener("click", event => {
     }
 })
 
+applicationElement.addEventListener("click", event => {
+    if (event.target.id === "newProfileCancel") {
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+    }
+})
+
 export const Profile = (userId) => {
         const loggedInUser = parseInt(localStorage.getItem("gg_user"))
         const profiles = getProfiles()

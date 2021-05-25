@@ -38,6 +38,7 @@ applicationElement.addEventListener("click", (event) => {
             about: document.querySelector("#profileAbout").value,
         };
         updateProfile(profileUpdate)
+        applicationElement.innerHTML = UserProfile(userId)
     }
 });
 
