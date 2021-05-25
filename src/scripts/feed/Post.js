@@ -33,14 +33,14 @@ applicationElement.addEventListener("click", event => {
             const likedByUserArray = getLikes().filter(like => like.userId === user)
             const like = likedByUserArray.find(like => like.postId === parseInt(postId))
             deleteLikes(like.id)
-                // delete favorite object from user
+                // deletes favorited object from user
         } else {
             targetPost.innerHTML = yellowStarHtml
             const postToAPI = {
                 postId: parseInt(postId),
                 userId: user
 
-                // add favorite object to user
+                // adds favorited object to user
             }
             postLikes(postToAPI)
         }

@@ -60,6 +60,10 @@
     margin-right: 2em;
 }
 
+.navigation__profile {
+    margin: .3rem 1rem 0rem 0rem;
+}
+
 #directMessageIcon {
     cursor: pointer;
 }
