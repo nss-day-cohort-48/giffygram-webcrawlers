@@ -48,7 +48,7 @@ applicationElement.addEventListener("click", event => {
     }
 })
 
-export const Post = (post, user, star) => {
+export const Post = (post, user, star, trash) => {
     return `<section class="post">
         <header>
             <h2 class="post__title">${post.title}</h2>
@@ -65,7 +65,7 @@ export const Post = (post, user, star) => {
         </div>
         <div class="post__actions">
             <div class="favoritePost--${post.id}"><img id="favoritePost--${post.id}" class="actionIcon" ${star}></div>
-            <div>
+            <div class="blockPost--${post.id}"><img id="blockPost--${post.id}" class="actionIcon" ${trash}></div>
             </div>
         </div>
     </section>
