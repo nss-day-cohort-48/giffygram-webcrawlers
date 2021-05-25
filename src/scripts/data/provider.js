@@ -13,6 +13,10 @@ const applicationState = {
     posts: [],
     likes: [],
     messages: [],
+    view: {
+        onProfile: false,
+        userId: null
+    }
 };
 
 export const fetchUsers = () => {
@@ -128,6 +132,10 @@ export const getFollows = () => {
 export const getFilters = () => {
     return {...applicationState.filters };
 };
+
+export const getView = () => {
+    return {...applicationState.view }
+}
 
 export const addPost = (postObject) => {
     const fetchPost = {
@@ -250,3 +258,8 @@ export const markMessageAsRead = (messageId) => {
     applicationElement.dispatchEvent(new CustomEvent("stateChanged"));
   });
 };
+export const setView = (onProfile, userId) => {
+    const view = applicationState.view
+    view.onProfile = onProfile
+    view.userId = userId
+}

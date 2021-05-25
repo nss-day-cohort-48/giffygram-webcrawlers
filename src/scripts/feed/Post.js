@@ -1,4 +1,4 @@
-import { getFilters, getLikes, setUserFilter, getUsers, deleteLikes, postLikes, fetchLikes } from "../data/provider.js"
+import { getFilters, getLikes, setUserFilter, getUsers, deleteLikes, postLikes, fetchLikes, getView, setView } from "../data/provider.js"
 import { UserProfile } from "../profile/UserProfile.js"
 import { PostList } from "./PostList.js"
 
@@ -8,7 +8,8 @@ const applicationElement = document.querySelector(".giffygram")
 applicationElement.addEventListener("click", event => {
     if (event.target.id.startsWith("profile--")) {
         const [, userId] = event.target.id.split("--")
-        applicationElement.innerHTML = UserProfile(parseInt(userId))
+
+        setView(true, parseInt(userId))
         setUserFilter(parseInt(userId))
 
         const mainFeed = document.querySelector(".giffygram__feed")
@@ -17,6 +18,7 @@ applicationElement.addEventListener("click", event => {
         const filters = getFilters()
         const postCount = document.querySelector("#postCount")
         postCount.innerHTML = filters.postCount
+        applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
 
@@ -39,8 +41,7 @@ applicationElement.addEventListener("click", event => {
             const postToAPI = {
                 postId: parseInt(postId),
                 userId: user
-
-                // add favorite object to user
+                    // add favorite object to user
             }
             postLikes(postToAPI)
         }
