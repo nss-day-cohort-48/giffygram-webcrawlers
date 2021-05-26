@@ -17,13 +17,20 @@ export const PostList = () => {
         postCount++
         const user = users.find(user =>
             user.id === post.userId)
+        let trash = ""
+        const loggedInUser = parseInt(localStorage.getItem("gg_user"))
+        if (post.userId === loggedInUser) {
+            trash = `src="/images/block.svg"`
+        }
+
         let star = blankStar
         for (const like of likedByUserArray) {
             if (like.postId === post.id) {
                 star = yellowStar
             }
+
         }
-        html += Post(post, user, star)
+        html += Post(post, user, star, trash)
     }
     setPostCount(postCount)
     return html

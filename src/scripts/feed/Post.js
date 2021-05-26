@@ -50,13 +50,13 @@ applicationElement.addEventListener("click", event => {
 
 
 
-mainContainer.addEventListener("click", click => {
-    if (click.target.id.startsWith("blockPost--")) {
-        const user = parseInt(localStorage.getItem("gg_user"))
-        const [,postId] = click.target.id.split("--")
+applicationElement.addEventListener("click", event => {
+    if (event.target.id.startsWith("blockPost--")) {
+      //  const user = parseInt(localStorage.getItem("gg_user"))
+        const [,postId] = event.target.id.split("--")
         deletePost(parseInt(postId))
-        const targetPost = document.querySelector(`.blockPost--${postId}`)
-        const trashHtml = `<img id="blockPost--${postId}" class="actionIcon" src="/images/block.svg">`
+       // const targetPost = document.querySelector(`.blockPost--${postId}`)
+       
     }
 })
 

@@ -18,5 +18,7 @@ export const GiffyGram = () => {
     <div class="giffygram__feed">
     ${ PostList() } 
     </div>
+    <div class="footerSpace"></div>
+
     ${Footer()}`
 }
