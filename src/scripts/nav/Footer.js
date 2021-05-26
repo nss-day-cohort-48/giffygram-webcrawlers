@@ -1,6 +1,5 @@
-import { clearFilters, getFilters, setDateFilter, setFavoritesFilter, setUserFilter } from "../data/provider.js"
+import { clearFilters, getFilters, getUsers, setDateFilter, setFavoritesFilter, setUserFilter } from "../data/provider.js"
 import { PostList } from "../feed/PostList.js"
-
 
 const applicationElement = document.querySelector(".giffygram")
 
@@ -86,11 +85,11 @@ applicationElement.addEventListener(
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 // Get the user's theme preference from local storage, if it's available
 const currentTheme = localStorage.getItem("theme")
-// If the user's preference in localStorage is dark already,
+    // If the user's preference in localStorage is dark already,
 if (currentTheme == "dark") {
     // then toggle the .dark-theme class on the body
     document.body.classList.toggle("dark-theme")
-    // Or, if the user's preference in localStorage is light
+        // Or, if the user's preference in localStorage is light
 } else if (currentTheme == "light") {
     // then they can toggle the .light-theme class on the body
     document.body.classList.toggle("light-theme")
@@ -100,29 +99,28 @@ if (currentTheme == "dark") {
 document.addEventListener("click", (clickEvent) => {
     // If the user's OS setting is dark and matches our .dark-mode class
     if (clickEvent.target.id === "btn-toggle") {
-       // allows the user to target the id of button toggle to trigger the mouse event
+        // allows the user to target the id of button toggle to trigger the mouse event
 
         //button.addEventListener('click', ()=>{  
 
         if (prefersDarkScheme.matches) {
             //then toggle to the light mode class
             document.body.classList.toggle("light-theme")
-            //but use .dark-mode if the .light-mode class is already running in the body,
-            var theme = document.body.classList.contains("light-theme")
-                ? "light"
-                : "dark";
+                //but use .dark-mode if the .light-mode class is already running in the body,
+            var theme = document.body.classList.contains("light-theme") ?
+                "light" :
+                "dark";
         } else {
             //Otherwise, do the same, but for .dark-mode
             document.body.classList.toggle("dark-theme")
-            var theme = document.body.classList.contains("dark-theme")
-                ? "dark"
-                : "light";
+            var theme = document.body.classList.contains("dark-theme") ?
+                "dark" :
+                "light";
         }
         // Saves the current preference to localStorage for the user to keep using it in this mode
         localStorage.setItem("theme", theme)
     }
-}
-)
+})
 
 export const Footer = () => {
 
@@ -139,17 +137,7 @@ export const Footer = () => {
                 <div class="footer__item">
                     Posts by user <select id="userSelection">
                         
-                            <option value="user--1">Ray Medrano</option>
-                        ,
-                            <option value="user--2">Meg Ducharme</option>
-                        ,
-                            <option value="user--3">Mark Ellis</option>
-                        ,
-                            <option value="user--4">Daniella Agnoletti</option>
-                        ,
-                            <option value="user--5">Kimmy Bird</option>
-                        ,
-                            <option value="user--6">Emily Lemmon</option>
+                           ${footerList()}
                         
                     </select>
                 </div>
@@ -168,4 +156,13 @@ export const Footer = () => {
             <button id="btn-toggle" class="toggleBtn">Dark-Mode</button>
             </div>
             </footer>`
+}
+
+const footerList = () => {
+    const users = getUsers()
+    let html = ''
+    users.forEach(user => {
+        html += `<option value="user--${user.id}">${user.name}</option>`
+    })
+    return html
 }
