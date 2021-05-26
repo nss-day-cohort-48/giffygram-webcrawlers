@@ -4,31 +4,38 @@ import { UserProfile } from "./UserProfile.js";
 
 const applicationElement = document.querySelector(".giffygram");
 
+
+// listens for when a user clicks on the edit profile button
 applicationElement.addEventListener("click", event => {
     if (event.target.id === "editIcon") {
-        const editElement = document.querySelector(".editIcon")
-        const editIcon = `<img id="editIcon" src="../images/edit.svg">`
-        const saveIcon = `<img id="editIcon" src="../images/save.svg">`
-        if (editElement.innerHTML === editIcon) {
-            editElement.innerHTML = saveIcon
-            const userId = parseInt(localStorage.getItem("gg_user"))
-            const user = getUsers().find(user => user.id === userId)
-            const userProfile = getProfiles().find(profile => profile.userId === userId)
-            const profile = document.querySelector(".profile")
-            profile.innerHTML = ProfileUpdate(user.name, userProfile.pic, userProfile.age, userProfile.location, userProfile.about, user.email, user.password)
 
-        } else {
-            editElement.innerHTML = editIcon
-        }
+        // getting the logged in user id
+        const userId = parseInt(localStorage.getItem("gg_user"))
+            // finds the users corresponding user object
+        const user = getUsers().find(user => user.id === userId)
+            //get all profiles
+        const profiles = getProfiles()
+            // find the profile object that matches the user id and store it in a variable
+        const userProfile = profiles.find(profile => profile.userId === userId)
+            // stores the profile section in the html as a variable
+        const profile = document.querySelector(".profile")
+            // sets the html profile innerHTML to an updated string
+        profile.innerHTML = ProfileUpdate(user.name, userProfile.pic, userProfile.age, userProfile.location, userProfile.about, user.email, user.password)
     }
 })
 
+// listens for when the user submits their profile edits
 applicationElement.addEventListener("click", (event) => {
     if (event.target.id === "UserProfileUpdateSubmit") {
+        //gets the logged in user
         const userId = parseInt(localStorage.getItem("gg_user"));
-        const userProfileId = getProfiles().find(
+        //get all profiles
+        const profiles = getProfiles()
+            // finds the profile id of the users profile
+        const userProfileId = profiles.find(
             (profile) => profile.userId === userId
         ).id;
+        // creates the updated profile object
         const profileUpdate = {
             id: userProfileId,
             userId: userId,
@@ -37,10 +44,12 @@ applicationElement.addEventListener("click", (event) => {
             location: document.querySelector("#profileLocation").value,
             about: document.querySelector("#profileAbout").value,
         };
+        // passes the updated profile to the API with a fetch PUT method
         updateProfile(profileUpdate)
     }
 });
 
+// listens for when a user hits the cancel button on the update profile form
 applicationElement.addEventListener("click", event => {
     if (event.target.id === "newProfile__cancel") {
         const userId = parseInt(localStorage.getItem("gg_user"));

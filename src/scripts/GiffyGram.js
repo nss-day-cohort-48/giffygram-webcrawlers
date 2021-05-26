@@ -1,11 +1,13 @@
 import { NavBar } from "./nav/NavBar.js"
-import { PostEntry } from "./feed/PostEntry.js"
 import { PostList } from "./feed/PostList.js"
 import { MessageForm } from "./message/MessageForm.js"
 import { Footer } from "./nav/Footer.js"
 import { noProfile } from "./profile/noProfile.js"
+import { PostEntry } from "./feed/PostEntry.js"
 
 
+
+//returns html of the main feed
 export const GiffyGram = () => {
 
     return `
