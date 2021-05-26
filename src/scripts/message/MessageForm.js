@@ -39,12 +39,12 @@ applicationElement.addEventListener("click", clickEvent => {
 
 
 export const MessageForm = () => {
-   const users = getUsers()
-//if messageBox is true, it will return and empty string and nothing will display, else it will return the string in the return statement
-    if (messageBox === true) {
-    }
-    else { 
-        return ` 
+        const users = getUsers()
+            //if messageBox is true, it will return and empty string and nothing will display, else it will return the string in the return statement
+        if (messageBox === true) {
+            return ''
+        } else {
+            return ` 
             <div class="directMessage">
                 <h3>Direct Message</h3>
                 <div>Recipient:
