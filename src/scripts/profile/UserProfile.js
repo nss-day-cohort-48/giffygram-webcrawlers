@@ -9,7 +9,12 @@ export const UserProfile = (userId) => {
     return `
     ${NavBar()}
     ${MessageForm()}
-    ${Profile(userId)}
+    ${
+        // this is the main difference from giffygram
+        // the user id is coming from the provider.js as a transient state
+        // we are passing that argument in the this function to display that user's profile
+        Profile(userId)
+    }
     <div class="giffygram__feed">
     ${ PostList() } 
     </div>

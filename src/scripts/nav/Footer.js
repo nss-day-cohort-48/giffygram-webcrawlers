@@ -3,79 +3,106 @@ import { PostList } from "../feed/PostList.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
-
+// listens for when the user filter by year
 applicationElement.addEventListener(
     "change",
     (event) => {
         if (event.target.id === "yearSelection") {
+
+            // sets the date selected by the user in a variable
             const date = event.target.value
+                // sets the date as transient state
             setDateFilter(date)
 
-            const mainFeed = document.querySelector(".giffygram__feed")
-            mainFeed.innerHTML = PostList()
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 
+            // gets all filters
             const filters = getFilters()
+                //sets variable to the element where we display the post count
             const postCount = document.querySelector("#postCount")
+                // changes that variables innerHTML to the post count from our filter object in transient state
             postCount.innerHTML = filters.postCount
         }
     }
 )
 
+// listens for when the user filters by users
 applicationElement.addEventListener(
     "change",
     (event) => {
         if (event.target.id === "userSelection") {
+            // stors the user id in a variable
             const [, userId] = event.target.value.split("--")
+                // sets the user filter as transient state
             setUserFilter(parseInt(userId))
 
-            const mainFeed = document.querySelector(".giffygram__feed")
-            mainFeed.innerHTML = PostList()
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 
+            // gets all filters
             const filters = getFilters()
+                //sets variable to the element where we display the post count
             const postCount = document.querySelector("#postCount")
+                // changes that variables innerHTML to the post count from our filter object in transient state
             postCount.innerHTML = filters.postCount
         }
     }
 )
 
+// listens for when the user filters by favorites
 applicationElement.addEventListener(
     "change",
     (event) => {
         if (event.target.id === "showOnlyFavorites") {
             if (event.target.checked) {
+                // sets the variable of isChecked to true
                 let isChecked = true
+                    // sets the transient state of the filtered by favorites to true
                 setFavoritesFilter(isChecked)
 
-                const mainFeed = document.querySelector(".giffygram__feed")
-                mainFeed.innerHTML = PostList()
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 
+                // gets all filters
                 const filters = getFilters()
+                    //sets variable to the element where we display the post count
                 const postCount = document.querySelector("#postCount")
+                    // changes that variables innerHTML to the post count from our filter object in transient state
                 postCount.innerHTML = filters.postCount
             } else {
+                // sets the variable of isChecked to false
                 let isChecked = false
+                    // sets the transient state of the filtered by favorites to false
                 setFavoritesFilter(isChecked)
 
-                const mainFeed = document.querySelector(".giffygram__feed")
-                mainFeed.innerHTML = PostList()
+                applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
 
+                // gets all filters
                 const filters = getFilters()
+                    //sets variable to the element where we display the post count
                 const postCount = document.querySelector("#postCount")
+                    // changes that variables innerHTML to the post count from our filter object in transient state
                 postCount.innerHTML = filters.postCount
             }
         }
     }
 )
 
+// listens for when the user clicks the clear filters button
 applicationElement.addEventListener(
     "click",
     (event) => {
         if (event.target.id === "clearFilters") {
+            // resets all the transient filters to null/false
             clearFilters()
-            const mainFeed = document.querySelector(".giffygram__feed")
+
+            applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+
+
+            // stores the checkboc in the DOM to a variable
             const checkBox = document.querySelector("#showOnlyFavorites")
+                // sets the checkboc to unchecked
             checkBox.checked = false
-            mainFeed.innerHTML = PostList()
+
+            // mainFeed.innerHTML = PostList()
 
         }
     }
@@ -159,9 +186,11 @@ export const Footer = () => {
 }
 
 const footerList = () => {
+    // gets all users
     const users = getUsers()
     let html = ''
     users.forEach(user => {
+        // add the the string an html representation of an option element with the users data interpolated
         html += `<option value="user--${user.id}">${user.name}</option>`
     })
     return html

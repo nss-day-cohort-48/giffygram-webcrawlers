@@ -5,33 +5,39 @@ const applicationElement = document.querySelector(".giffygram")
 
 document.addEventListener("click", event => {
     if (event.target.id === "signUpButton") {
+        // sets the main html container to the register form
         applicationElement.innerHTML = RegisterForm()
     }
 })
 
 document.addEventListener("click", event => {
     if (event.target.id === "registerButton") {
+        //stores the user input in variables
         const firstName = document.querySelector("input[name='firstName']").value
         const lastName = document.querySelector("input[name='lastName']").value
         const email = document.querySelector("input[name='email']").value
         const passwordOne = document.querySelector("input[name='passwordOne']").value
         const passwordTwo = document.querySelector("input[name='passwordTwo']").value
 
+        // checks whether passwords match, if so, it creates a new user object and then passes it into the register form function
         if (passwordCheck(passwordOne, passwordTwo)) {
             const newUser = {
-                name: capitalize(firstName) + ' ' + capitalize(lastName),
-                email: email,
-                password: passwordOne
-            }
+                    name: capitalize(firstName) + ' ' + capitalize(lastName),
+                    email: email,
+                    password: passwordOne
+                }
+                // this sends the new user object to the API through this fetch POST
             registerUser(newUser)
                 // applicationElement.innerHTML = LoginForm()
         } else {
+            // if passwords don't match, user will get an error message
             document.querySelector(".passwordMessage").innerHTML = "Passwords do not match!"
         }
 
     }
 })
 
+// returns html string of register form
 export const RegisterForm = () => {
     return `
     <div class="registerForm">

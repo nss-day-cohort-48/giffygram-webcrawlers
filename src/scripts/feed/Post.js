@@ -5,44 +5,69 @@ import { PostList } from "./PostList.js"
 
 const applicationElement = document.querySelector(".giffygram")
 
+
+// listens for user name in posts to be clicked
 applicationElement.addEventListener("click", event => {
     if (event.target.id.startsWith("profile--")) {
+
+        // store the user id in a variable
         const [, userId] = event.target.id.split("--")
 
+        // set the transient state view to look like this:
+        // in applicationState(provider.js) : view: {onProfile: false, userId: null}
+        // onProfile is set to true and userId is set to the user profile we are trying to be directed to
         setView(true, parseInt(userId))
+
+        // adds a transient state to the filters for filtering by the selected users posts
         setUserFilter(parseInt(userId))
 
-        const mainFeed = document.querySelector(".giffygram__feed")
-        mainFeed.innerHTML = PostList()
-
+        // get all filters
         const filters = getFilters()
+            // setting a variable to an html element in the document
         const postCount = document.querySelector("#postCount")
+            // sets the innerHTML to the post count
         postCount.innerHTML = filters.postCount
+            // change state
         applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
     }
 })
 
+// listes for when a user clicks on a star in a post
 applicationElement.addEventListener("click", event => {
     if (event.target.id.startsWith("favoritePost")) {
+        //gets logged in user
         const user = parseInt(localStorage.getItem("gg_user"))
+            //stores the post id in a variable
         const [, postId] = event.target.id.split("--")
+            //stores the html element that we are clicking on in a variable
         const targetPost = document.querySelector(`.favoritePost--${postId}`)
+            // html that we will insert into the innerHTML of targetPost
         const yellowStarHtml = `<img id="favoritePost--${postId}" class="actionIcon" src="/images/favorite-star-yellow.svg">`
         const blankStarHtml = `<img id="favoritePost--${postId}" class="actionIcon" src="/images/favorite-star-blank.svg">`
 
         if (targetPost.innerHTML === yellowStarHtml) {
+            // if the innerHTML is equal to yellow, we change it to blank
             targetPost.innerHTML = blankStarHtml
-            const likedByUserArray = getLikes().filter(like => like.userId === user)
+                // get all likes
+            const likes = getLikes()
+                // filter likes based off of currently logged in user
+            const likedByUserArray = likes.filter(like => like.userId === user)
+                // find the exact like object that the user is trying to unlike
             const like = likedByUserArray.find(like => like.postId === parseInt(postId))
-            deleteLikes(like.id)
+                // passes the unliked like object into the deleteLikes function
+                // deleteLikes is a fetch call with the DELETE method
                 // deletes favorited object from user
+            deleteLikes(like.id)
         } else {
+            // if the star is not yellow, its blank, and then we set it to yellow
             targetPost.innerHTML = yellowStarHtml
+                // create a new like object
             const postToAPI = {
-                postId: parseInt(postId),
-                userId: user
-                    // adds favorited object to user
-            }
+                    postId: parseInt(postId),
+                    userId: user
+                }
+                // passes the new like object into the postLikes function
+                // postLikes in a fetch call with the POST method and saves it to the API
             postLikes(postToAPI)
         }
     }
@@ -52,11 +77,11 @@ applicationElement.addEventListener("click", event => {
 
 applicationElement.addEventListener("click", event => {
     if (event.target.id.startsWith("blockPost--")) {
-      //  const user = parseInt(localStorage.getItem("gg_user"))
-        const [,postId] = event.target.id.split("--")
+        //  const user = parseInt(localStorage.getItem("gg_user"))
+        const [, postId] = event.target.id.split("--")
         deletePost(parseInt(postId))
-       // const targetPost = document.querySelector(`.blockPost--${postId}`)
-       
+            // const targetPost = document.querySelector(`.blockPost--${postId}`)
+
     }
 })
 
