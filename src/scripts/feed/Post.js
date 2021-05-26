@@ -1,4 +1,4 @@
-import { getFilters, getLikes, setUserFilter, getUsers, deleteLikes, postLikes, fetchLikes, getView, setView } from "../data/provider.js"
+import { getFilters, getLikes, setUserFilter, getUsers, deleteLikes, postLikes, fetchLikes, getView, setView, deletePost } from "../data/provider.js"
 import { UserProfile } from "../profile/UserProfile.js"
 import { PostList } from "./PostList.js"
 
@@ -48,7 +48,19 @@ applicationElement.addEventListener("click", event => {
     }
 })
 
-export const Post = (post, user, star) => {
+
+
+applicationElement.addEventListener("click", event => {
+    if (event.target.id.startsWith("blockPost--")) {
+      //  const user = parseInt(localStorage.getItem("gg_user"))
+        const [,postId] = event.target.id.split("--")
+        deletePost(parseInt(postId))
+       // const targetPost = document.querySelector(`.blockPost--${postId}`)
+       
+    }
+})
+
+export const Post = (post, user, star, trash) => {
     return `<section class="post">
         <header>
             <h2 class="post__title">${post.title}</h2>
@@ -65,7 +77,7 @@ export const Post = (post, user, star) => {
         </div>
         <div class="post__actions">
             <div class="favoritePost--${post.id}"><img id="favoritePost--${post.id}" class="actionIcon" ${star}></div>
-            <div>
+            <div class="blockPost--${post.id}"><img id="blockPost--${post.id}" class="actionIcon" ${trash}></div>
             </div>
         </div>
     </section>
